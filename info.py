@@ -93,6 +93,12 @@ LOG_STR += (f"MAX_LIST_ELM Found, long list will be shortened to first {MAX_LIST
 
 LOG_STR += f"Your current IMDB template is {IMDB_TEMPLATE}"
 
+# Extra Features By TamilanBotsZ 💥
+
+AUTO_DELETE_SECONDS = environ.get("AUTO_DELETE_SECONDS", "")
+
+COMMAND_HAND_LER = environ.get("COMMAND_HAND_LER", "/")
+
 SHORTLINK_URL = environ.get("SHORTLINK_URL", "Shorturllink.in")
 
 SHORTLINK_API = environ.get("SHORTLINK_API", "d7e6bf4c5666744fbcd6aa8ba0a08d4cac41e27a")
