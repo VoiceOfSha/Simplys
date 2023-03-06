@@ -439,12 +439,12 @@ def humanbytes(size):
 
 async def get_shortlink(chat_id, link):
     settings = await get_settings(chat_id) #fetching settings for group
-    if 'shortlink' in settings.keys():
-        URL = settings['shortlink']
+    if 'set_shortner' in settings.keys():
+        URL = settings['set_shortner']
     else:
         URL = SHORTLINK_URL
-    if 'shortlink_api' in settings.keys():
-        API = settings['shortlink_api']
+    if 'shortner_api' in settings.keys():
+        API = settings['shortner_api']
     else:
         API = SHORTLINK_API
     https = link.split(":")[0] #splitting https or http from link
@@ -463,13 +463,13 @@ async def get_shortlink(chat_id, link):
                 async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
                     data = await response.json(content_type="text/html")
                     if data["status"] == "success":
-                        return data["shortlink"]
+                        return data["set_shortner"]
                     else:
                         logger.error(f"Error: {data['message']}")
-                        return f'https://{URL}/shortLink?token={API}&format=json&link={link}'
+                        return f'https://{URL}/set_shortner?token={API}&format=json&link={link}'
         except Exception as e:
             logger.error(e)
-            return f'https://{URL}/shortLink?token={API}&format=json&link={link}'
+            return f'https://{URL}/set_shortner?token={API}&format=json&link={link}'
     else:
         url = f'https://{URL}/api'
         params = {
@@ -508,14 +508,14 @@ async def get_verify_shorted_link(link):
                 async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
                     data = await response.json(content_type="text/html")
                     if data["status"] == "success":
-                        return data["shortlink"]
+                        return data["set_shortner"]
                     else:
                         logger.error(f"Error: {data['message']}")
-                        return f'https://{URL}/shortLink?token={API}&format=json&link={link}'
+                        return f'https://{URL}/set_shortner?token={API}&format=json&link={link}'
 
         except Exception as e:
             logger.error(e)
-            return f'https://{URL}/shortLink?token={API}&format=json&link={link}'
+            return f'https://{URL}/set_shortner?token={API}&format=json&link={link}'
     else:
         url = f'https://{URL}/api'
         params = {'api': API,
